@@ -6,6 +6,7 @@ import spring.com.SpringBootDemo.model.Person;
 import spring.com.SpringBootDemo.service.PersonService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/api/v1/person")
 @RestController
@@ -28,6 +29,12 @@ public class PersonController {
     @GetMapping
     public List<Person> getAllPeople() {
         return personService.getAllPeople();
+    }
+
+    @GetMapping(path = "{id}")
+    public Person getPersonById(@PathVariable("id") UUID id) {
+        return personService.getPersonById(id)
+                .orElse(null);
     }
 
 }
